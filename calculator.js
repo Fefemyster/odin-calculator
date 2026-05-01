@@ -16,23 +16,27 @@ function operate(x, y, operator) {
   }
 }
 
-//Create the functions that update one of your
-// number variables when the calculator’s
-// digit buttons are clicked.
-// Your calculator’s display
-// should also update to reflect the value
-// of that number variable.
+operate(x, y, operator);
 
-//1. Get the value on the button and update the display
-const buttonNumbers = document.querySelector(".buttons");
+//1. Make selection
+//We get a nodeList of our buttons and then we work with it
+const allButtons = document.querySelectorAll(".btn");
 
-buttonNumbers.addEventListener("click", (e) => {
-  let target = e.target;
-  if (target.matches("button")) {
-    let value = target.innerHTML;
+const resultOutput = document.querySelector("#output");
 
-    document.querySelector("#output").value += value;
-  }
+console.log(allButtons);
+console.log(allButtons[3]);
+
+//2. Register a click event to all of the buttons
+
+allButtons.forEach((bt) => {
+  bt.addEventListener("click", (e) => {
+    let value = e.target.innerHTML;
+    resultOutput.value += value;
+  });
 });
 
-operate(x, y, operator);
+// Make the calculator work! You’ll need to store the
+// first and second numbers input by the user and then operate() on them
+// when the user presses the = button,
+// according to the operator that was selected between the numbers.
