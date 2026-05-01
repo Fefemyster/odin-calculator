@@ -19,7 +19,8 @@ function operate(x, y, operator) {
 operate(x, y, operator);
 
 //1. Make selection
-//We get a nodeList of our buttons and then we work with it
+//We get a nodeList of our buttons that have class = ".btn"
+// and then we work with it
 const allButtons = document.querySelectorAll(".btn");
 
 const resultOutput = document.querySelector("#output");
