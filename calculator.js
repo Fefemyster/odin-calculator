@@ -1,6 +1,8 @@
-let x = [];
+let x = []; //Array for getting value
+let currentNumber = 0; //First number for operation
 let operator = "-"; //Operator Input
-let y = 0; //Second Input
+let y = 0; //Second number for operation
+
 //1. Make selection
 //We get a nodeList of our buttons that have class = ".btn"
 // and then we work with it
@@ -18,9 +20,9 @@ function getInputValue(element, array) {
       array.push(value);
 
       // Convert array -> string -> number
-      let number = Number(array.join("")); //Turn this into an int
+      currentNumber = Number(array.join("")); //Turn this into an int and updates global value
 
-      console.log(number); // This is now a single number
+      console.log(currentNumber); // This is now a single number
     });
   });
 }
