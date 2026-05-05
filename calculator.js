@@ -1,7 +1,33 @@
-let x = 0;
-let y = 0;
-let operator = "-";
+let x = [];
+let operator = "-"; //Operator Input
+let y = 0; //Second Input
+//1. Make selection
+//We get a nodeList of our buttons that have class = ".btn"
+// and then we work with it
+const allButtons = document.querySelectorAll(".btn");
 
+const resultOutput = document.querySelector("#output");
+
+//2. Register a click event to all of the buttons and get value
+
+function getInputValue(element, array) {
+  element.forEach((bt) => {
+    bt.addEventListener("click", (e) => {
+      let value = e.target.innerHTML;
+      resultOutput.value += value;
+      array.push(value);
+
+      // Convert array -> string -> number
+      let number = Number(array.join("")); //Turn this into an int
+
+      console.log(number); // This is now a single number
+    });
+  });
+}
+
+getInputValue(allButtons, x);
+
+/*
 function operate(x, y, operator) {
   switch (operator) {
     case "+":
@@ -18,24 +44,7 @@ function operate(x, y, operator) {
 
 operate(x, y, operator);
 
-//1. Make selection
-//We get a nodeList of our buttons that have class = ".btn"
-// and then we work with it
-const allButtons = document.querySelectorAll(".btn");
-
-const resultOutput = document.querySelector("#output");
-
-console.log(allButtons);
-console.log(allButtons[3]);
-
-//2. Register a click event to all of the buttons
-
-allButtons.forEach((bt) => {
-  bt.addEventListener("click", (e) => {
-    let value = e.target.innerHTML;
-    resultOutput.value += value;
-  });
-});
+*/
 
 // Make the calculator work! You’ll need to store the
 // first and second numbers input by the user and then operate() on them
