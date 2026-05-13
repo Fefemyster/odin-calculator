@@ -1,47 +1,59 @@
-let x = []; //Array for getting value
+let currentArray = []; //Array for getting value
+let secondArray = []; //Array for getting second value
 let currentNumber = " "; //First number for operation
 let operator = " "; //Operator Input
 let secondNumber = " "; //Second number for operation
+let operatorSelected = false; // For tracking wether operator is selected
 
 //1. Make selection
 //We get a nodeList of our buttons that have class = ".btn"
 // and then we work with it
-const allButtons = document.querySelectorAll(".btn");
+const allButtons = document.querySelectorAll(".btn"); //nodeList
+
+const operatorButtons = document.querySelectorAll(".btnOperator"); //nodeList
 
 const resultOutput = document.querySelector("#output");
 
-const operatorButtons = document.querySelectorAll(".btnOperator");
+const resultButton = document.querySelector("#btnEqual");
 
-//2. Register a click event to all of the buttons and get value
+//2. Register a click event to all of the number buttons and get value
 
-function getInputValue(element, array) {
-  element.forEach((bt) => {
+function getInputValue() {
+  allButtons.forEach((bt) => {
     bt.addEventListener("click", (e) => {
-      console.log(bt);
       let value = e.target.innerHTML;
       resultOutput.value += value;
-      array.push(value);
 
-      // Convert array -> string -> number
-      currentNumber = Number(array.join("")); //Turn this into an int and updates global value
+      if (operatorSelected === false) {
+        currentArray.push(value);
 
-      console.log(currentNumber);
+        // Convert array -> string -> number
+        currentNumber = Number(currentArray.join("")); //Turn this into an int and updates global value
 
+        console.log(currentNumber);
+      } else {
+        secondArray.push(value);
+
+        // Convert array -> string -> number
+        secondNumber = Number(secondArray.join("")); //Turn this into an int and updates global value
+
+        console.log(secondNumber);
+      }
       //Need to clear number after selecting an operator for getting second value
 
-      // This is now a single number
+      //3. Get second number using the second array after operator is selected
     });
   });
 }
 
-//2. Get operator and reset currentNumber
+//2. Get operator
 function getOperator() {
   operatorButtons.forEach((bt) => {
     bt.addEventListener("click", (e) => {
-      let value = e.target.innerHTML;
-      let operator = e.target.innerHTML;
-      console.log(operator);
+      operator = e.target.innerHTML;
+      operatorSelected = true;
       resultOutput.value += operator;
+      console.log("Operator:", operator);
     });
   });
 }
@@ -53,7 +65,6 @@ Your main script runs top → bottom
 Event listeners run later, when triggered
 */
 
-//This function must pop when = is selected
 function operate(x, y, operator) {
   switch (operator) {
     case "+":
@@ -65,13 +76,19 @@ function operate(x, y, operator) {
     case "/":
       console.log(x / y);
       break;
+    case "x":
+      console.log(x * y);
+      break;
   }
 }
 
-let firsInputValue = getInputValue(allButtons, x);
-let operatorInputValue = getOperator();
+getInputValue();
+getOperator();
 
-operate(firsInputValue, secondNumber, operatorInputValue);
+//This function call must pop when = is selected
+resultButton.addEventListener("click", () => {
+  operate(currentNumber, secondNumber, operator);
+});
 
 // Make the calculator work! You’ll need to store the
 // first and second numbers input by the user and then operate() on them
