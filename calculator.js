@@ -4,6 +4,7 @@ let currentNumber = " "; //First number for operation
 let operator = " "; //Operator Input
 let secondNumber = " "; //Second number for operation
 let operatorSelected = false; // For tracking wether operator is selected
+let result;
 
 //1. Make selection
 //We get a nodeList of our buttons that have class = ".btn"
@@ -15,6 +16,8 @@ const operatorButtons = document.querySelectorAll(".btnOperator"); //nodeList
 const resultOutput = document.querySelector("#output");
 
 const resultButton = document.querySelector("#btnEqual");
+
+const clearButton = document.querySelector("#btnClear");
 
 //2. Register a click event to all of the number buttons and get value
 
@@ -32,6 +35,7 @@ function getInputValue() {
 
         console.log(currentNumber);
       } else {
+        //3. Get second number using the second array after operator is selected
         secondArray.push(value);
 
         // Convert array -> string -> number
@@ -39,14 +43,11 @@ function getInputValue() {
 
         console.log(secondNumber);
       }
-      //Need to clear number after selecting an operator for getting second value
-
-      //3. Get second number using the second array after operator is selected
     });
   });
 }
 
-//2. Get operator
+//4. Get operator
 function getOperator() {
   operatorButtons.forEach((bt) => {
     bt.addEventListener("click", (e) => {
@@ -57,6 +58,10 @@ function getOperator() {
     });
   });
 }
+
+//5. Need the calculator to accept initial negative values
+//6. The calculator should be able to record the result and use it for another operation
+// Example = 3+2+3 make it 5+3 and so on
 
 /*
 This is called asynchronous behavior:
@@ -88,6 +93,16 @@ getOperator();
 //This function call must pop when = is selected
 resultButton.addEventListener("click", () => {
   operate(currentNumber, secondNumber, operator);
+});
+
+//Clear button that will reset values for all variables and input
+clearButton.addEventListener("click", () => {
+  currentArray = []; //Array for getting value
+  secondArray = []; //Array for getting second value
+  currentNumber = " "; //First number for operation
+  operator = " "; //Operator Input
+  secondNumber = " "; //Second number for operation
+  operatorSelected = false; // For tracking wether operator is selected
 });
 
 // Make the calculator work! You’ll need to store the
