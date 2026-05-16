@@ -114,7 +114,7 @@ function operate() {
   secondArray = [];
 
   // Show result
-  resultOutput.value = result;
+  resultOutput.value = result.toFixed(3);
 }
 
 getInputValue();
