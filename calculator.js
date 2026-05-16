@@ -4,7 +4,7 @@ let currentNumber = " "; //First number for operation
 let operator = " "; //Operator Input
 let secondNumber = " "; //Second number for operation
 let operatorSelected = false; // For tracking wether operator is selected
-let result;
+let result = 0;
 
 //1. Make selection
 //We get a nodeList of our buttons that have class = ".btn"
@@ -40,19 +40,28 @@ function getInputValue() {
 
         // Convert array -> string -> number
         secondNumber = Number(secondArray.join("")); //Turn this into an int and updates global value
-
         console.log(secondNumber);
       }
     });
   });
 }
 
+//operate the first set of numbers and save that result
+// currentNumber should be replace as the result
+// this result should be add to the second number but this second number
+// need to be reset when inputting the second operator
+
 //4. Get operator
 function getOperator() {
   operatorButtons.forEach((bt) => {
     bt.addEventListener("click", (e) => {
+      if (secondNumber !== " ") {
+        operate();
+      }
+
       operator = e.target.innerHTML;
       operatorSelected = true;
+
       resultOutput.value += operator;
       console.log("Operator:", operator);
     });
@@ -60,8 +69,6 @@ function getOperator() {
 }
 
 //5. Need the calculator to accept initial negative values
-//6. The calculator should be able to record the result and use it for another operation
-// Example = 3+2+3 make it 5+3 and so on
 
 /*
 This is called asynchronous behavior:
@@ -70,29 +77,53 @@ Your main script runs top → bottom
 Event listeners run later, when triggered
 */
 
-function operate(x, y, operator) {
+// 6. The calculator should be able to record the result and use it for another operation
+// The result should be save when inputting a second operator - operator
+// selected equal true could call operate and store initial result
+
+// Example = 3+2+3 make it 5+3 and so on
+//Your calculator should not evaluate more than a single pair of numbers at a time.
+// operate can be call when pressing the next operator key and store
+// the result of the initial operation to then operate it with the second value
+
+function operate() {
   switch (operator) {
     case "+":
-      console.log(x + y);
+      result = currentNumber + secondNumber;
+      console.log(`Result: ${result}`);
       break;
     case "-":
-      console.log(x - y);
+      result = currentNumber - secondNumber;
+      console.log(`Result: ${result}`);
       break;
     case "/":
-      console.log(x / y);
+      result = currentNumber / secondNumber;
+      console.log(`Result: ${result}`);
       break;
     case "x":
-      console.log(x * y);
+      result = currentNumber * secondNumber;
+      console.log(`Result: ${result}`);
       break;
   }
+
+  // Save result as first number
+  currentNumber = result;
+
+  // Reset second number for next operation
+  secondNumber = "";
+  secondArray = [];
+
+  // Show result
+  resultOutput.value = result;
 }
 
 getInputValue();
 getOperator();
 
 //This function call must pop when = is selected
+// Need to fix it since secondNumber is not updating
 resultButton.addEventListener("click", () => {
-  operate(currentNumber, secondNumber, operator);
+  operate();
 });
 
 //Clear button that will reset values for all variables and input
@@ -103,6 +134,7 @@ clearButton.addEventListener("click", () => {
   operator = " "; //Operator Input
   secondNumber = " "; //Second number for operation
   operatorSelected = false; // For tracking wether operator is selected
+  document.getElementById("output").value = "";
 });
 
 // Make the calculator work! You’ll need to store the
