@@ -1,8 +1,8 @@
 let currentArray = []; //Array for getting value
 let secondArray = []; //Array for getting second value
-let currentNumber = " "; //First number for operation
+let currentNumber = 0; //First number for operation
 let operator = " "; //Operator Input
-let secondNumber = " "; //Second number for operation
+let secondNumber = 0; //Second number for operation
 let operatorSelected = false; // For tracking wether operator is selected
 let result = 0;
 
@@ -55,7 +55,7 @@ function getInputValue() {
 function getOperator() {
   operatorButtons.forEach((bt) => {
     bt.addEventListener("click", (e) => {
-      if (secondNumber !== " ") {
+      if (secondArray.length > 0) {
         operate();
       }
 
@@ -120,8 +120,6 @@ function operate() {
 getInputValue();
 getOperator();
 
-//This function call must pop when = is selected
-// Need to fix it since secondNumber is not updating
 resultButton.addEventListener("click", () => {
   operate();
 });
@@ -130,9 +128,9 @@ resultButton.addEventListener("click", () => {
 clearButton.addEventListener("click", () => {
   currentArray = []; //Array for getting value
   secondArray = []; //Array for getting second value
-  currentNumber = " "; //First number for operation
+  currentNumber = 0; //First number for operation
   operator = " "; //Operator Input
-  secondNumber = " "; //Second number for operation
+  secondNumber = 0; //Second number for operation
   operatorSelected = false; // For tracking wether operator is selected
   document.getElementById("output").value = "";
 });
