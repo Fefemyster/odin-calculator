@@ -47,11 +47,6 @@ function getInputValue() {
   });
 }
 
-//operate the first set of numbers and save that result
-// currentNumber should be replace as the result
-// this result should be add to the second number but this second number
-// need to be reset when inputting the second operator
-
 //4. Get operator
 function getOperator() {
   operatorButtons.forEach((bt) => {
@@ -71,23 +66,14 @@ function getOperator() {
 
 //5. Need the calculator to accept initial negative values
 
-/*
-This is called asynchronous behavior:
-
-Your main script runs top → bottom
-Event listeners run later, when triggered
-*/
-
-// 6. The calculator should be able to record the result and use it for another operation
-// The result should be save when inputting a second operator - operator
-// selected equal true could call operate and store initial result
-
-// Example = 3+2+3 make it 5+3 and so on
-//Your calculator should not evaluate more than a single pair of numbers at a time.
-// operate can be call when pressing the next operator key and store
-// the result of the initial operation to then operate it with the second value
+//Make sure that your calculator only runs an operation when
+// supplied with two numbers and an operator by the user.
 
 function operate() {
+  if (secondNumber === 0) {
+    resultOutput.value = currentNumber;
+    return;
+  }
   switch (operator) {
     case "+":
       result = currentNumber + secondNumber;
@@ -103,7 +89,6 @@ function operate() {
         clearInput();
         return;
       }
-
       result = currentNumber / secondNumber;
       console.log(`Result: ${result}`);
       break;
@@ -144,10 +129,3 @@ function clearInput() {
   operatorSelected = false; // For tracking wether operator is selected
   document.getElementById("output").value = "";
 }
-
-//Clear button that will reset values for all variables and input
-
-// Make the calculator work! You’ll need to store the
-// first and second numbers input by the user and then operate() on them
-// when the user presses the = button,
-// according to the operator that was selected between the numbers.
