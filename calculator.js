@@ -40,6 +40,7 @@ function getInputValue() {
 
         // Convert array -> string -> number
         secondNumber = Number(secondArray.join("")); //Turn this into an int and updates global value
+
         console.log(secondNumber);
       }
     });
@@ -97,6 +98,12 @@ function operate() {
       console.log(`Result: ${result}`);
       break;
     case "/":
+      if (secondNumber === 0) {
+        alert("Can't divide by zero!");
+        clearInput();
+        return;
+      }
+
       result = currentNumber / secondNumber;
       console.log(`Result: ${result}`);
       break;
@@ -114,7 +121,7 @@ function operate() {
   secondArray = [];
 
   // Show result
-  resultOutput.value = result.toFixed(3);
+  resultOutput.value = result.toFixed(2);
 }
 
 getInputValue();
@@ -124,8 +131,11 @@ resultButton.addEventListener("click", () => {
   operate();
 });
 
-//Clear button that will reset values for all variables and input
 clearButton.addEventListener("click", () => {
+  clearInput();
+});
+
+function clearInput() {
   currentArray = []; //Array for getting value
   secondArray = []; //Array for getting second value
   currentNumber = 0; //First number for operation
@@ -133,7 +143,9 @@ clearButton.addEventListener("click", () => {
   secondNumber = 0; //Second number for operation
   operatorSelected = false; // For tracking wether operator is selected
   document.getElementById("output").value = "";
-});
+}
+
+//Clear button that will reset values for all variables and input
 
 // Make the calculator work! You’ll need to store the
 // first and second numbers input by the user and then operate() on them
