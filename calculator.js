@@ -51,6 +51,11 @@ function getInputValue() {
 function getOperator() {
   operatorButtons.forEach((bt) => {
     bt.addEventListener("click", (e) => {
+      // Prevent operator being inputted before number
+      if (currentArray.length === 0 && currentNumber === 0) {
+        return;
+      }
+
       if (secondArray.length > 0) {
         operate();
       }
@@ -64,14 +69,22 @@ function getOperator() {
   });
 }
 
-//5. Need the calculator to accept initial negative values
+//5. Need the calculator to accept initial negative values -- Pending
 
 //Make sure that your calculator only runs an operation when
-// supplied with two numbers and an operator by the user.
+// supplied with two numbers and an operator by the user. -- Done
+
+//Issues to fix:
+//When trying to operate a result with an operator and empty second value
+// returns an error -- Fixed
+
+//When dividing by zero the error does not pop -- Fixed
+
+//If an operator is input initially with no current number
+//calculator breaks -- Fixed on line 55
 
 function operate() {
-  if (secondNumber === 0) {
-    resultOutput.value = currentNumber;
+  if (secondArray.length === 0) {
     return;
   }
   switch (operator) {
@@ -102,11 +115,11 @@ function operate() {
   currentNumber = result;
 
   // Reset second number for next operation
-  secondNumber = "";
+  secondNumber = 0;
   secondArray = [];
 
   // Show result
-  resultOutput.value = result.toFixed(2);
+  resultOutput.value = result.toFixed(3);
 }
 
 getInputValue();
