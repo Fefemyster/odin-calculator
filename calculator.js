@@ -69,19 +69,7 @@ function getOperator() {
   });
 }
 
-//5. Need the calculator to accept initial negative values -- Pending
-
-//Make sure that your calculator only runs an operation when
-// supplied with two numbers and an operator by the user. -- Done
-
-//Issues to fix:
-//When trying to operate a result with an operator and empty second value
-// returns an error -- Fixed
-
-//When dividing by zero the error does not pop -- Fixed
-
-//If an operator is input initially with no current number
-//calculator breaks -- Fixed on line 55
+//5. Need the calculator to accept negative values -- Pending
 
 function operate() {
   if (secondArray.length === 0) {
@@ -119,7 +107,7 @@ function operate() {
   secondArray = [];
 
   // Show result
-  resultOutput.value = result.toFixed(3);
+  resultOutput.value = result.toFixed(1);
 }
 
 getInputValue();
