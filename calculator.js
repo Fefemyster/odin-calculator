@@ -69,8 +69,6 @@ function getOperator() {
   });
 }
 
-//5. Need the calculator to accept negative values -- Pending
-
 function operate() {
   if (secondArray.length === 0) {
     return;
