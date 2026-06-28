@@ -108,6 +108,14 @@ function operate() {
   resultOutput.value = result.toFixed(1);
 }
 
+//MISSING
+//When a result is displayed, pressing a new digit
+// should clear the result and start a new calculation instead of appending the digit
+//to the existing result. Check whether this is the case on your calculator!
+
+//1. Need to clear the result
+//2. The result need to be clear when pressing a new digit
+
 getInputValue();
 getOperator();
 
